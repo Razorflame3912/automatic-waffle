@@ -51,13 +51,42 @@ for sublist in linested:
         index += 1
         DATA[sublist[0]] = lookup
         
-
+print 'This is the dictionary!'
 print DATA
 
 
 #Random selection
-random_selection = random.uniform(0,99.8)
+def random_job():
+    random_selection = random.uniform(0,99.8)
+    #print random_selection
+    where_i_am = 0.0
+    for key in DATA:
+        where_i_am += DATA[key]['Percentage']
+        #print where_i_am
+        if(where_i_am >= random_selection):
+            return key
+            break
 
     
+#Run tests, output is a dictionary with the difference in listed percentages and test percentages.
+#As close as possible to zero is optimal.
+i = 0
+test_dic = {}
+for key in DATA:
+    test_dic[key] = 0.0
 
+runthismanytimes = 1000000
+while(i < runthismanytimes):
+    selected = random_job()
+    test_dic[selected] = test_dic[selected] + 1
+    i+=1
+
+for key in test_dic:
+    test_dic[key] = DATA[key]['Percentage'] - (test_dic[key]/runthismanytimes)*100
+
+print 'These are the test cases! As close to zero is good! Means test data was very close to listed percentages'
+print test_dic
+'''
+print random_job()
+'''
 
