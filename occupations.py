@@ -8,7 +8,7 @@ str = f.read()
 f.close()
 
 #Creates list of file lines
-li = str.split('\n')
+li = str.replace('\r',"").split('\n')
 linested = []
 
 
@@ -44,12 +44,20 @@ for sublist in linested:
     lookup = {}
     index = 1
     while index < len(liheader):
-        lookup[liheader[index]]=sublist[index]
+        try:
+            lookup[liheader[index]]=float(sublist[index])
+        except Exception as e:
+            lookup[liheader[index]]=sublist[index]
         index += 1
         DATA[sublist[0]] = lookup
         
 
 print DATA
+
+
+#Random selection
+random_selection = random.uniform(0,99.8)
+
     
 
 
